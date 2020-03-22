@@ -1,3 +1,4 @@
+import 'package:covid19/cases_bar_chart.dart';
 import 'package:covid19/resources/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
@@ -66,6 +67,7 @@ class Home extends StatelessWidget {
                   ],
                 ),
               ),
+
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 16),
                 child:  Card(
@@ -83,10 +85,13 @@ class Home extends StatelessWidget {
                             ),
                         ),
                         SizedBox(height: 12),
-                        Container(
-                          height: 144,
-                          color: Colors.black12,
-                        )
+                        AspectRatio(
+                            aspectRatio: 1.75,
+                            child: CasesBarChart.withSampleData(),
+
+                          ),
+
+
                       ],
                     )
                   )
@@ -291,6 +296,4 @@ class Home extends StatelessWidget {
     );
   }
 }
-
-
 
