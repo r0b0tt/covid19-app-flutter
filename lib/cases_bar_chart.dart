@@ -1,3 +1,4 @@
+import 'package:covid19/resources/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 
@@ -16,37 +17,60 @@ class CasesBarChart extends StatelessWidget {
     );
   }
 
-
   @override
   Widget build(BuildContext context) {
     return new charts.BarChart(
       seriesList,
       animate: animate,
-      barGroupingType: charts.BarGroupingType.stacked,
+      barGroupingType: charts.BarGroupingType.grouped,
     );
   }
 
   /// Create series list with multiple series
   static List<charts.Series<VirusData, String>> _createSampleData() {
-    final desktoppeopleData = [
+    final infectedPeopleData = [
       new VirusData("Jan", 12000),
       new VirusData("Feb", 12000),
       new VirusData("Mar", 120000),
-      new VirusData("April", 0)
+      new VirusData("Apr", 0),
+      new VirusData("May", 0),
+      new VirusData("Jun", 0),
+      new VirusData("Jul", 0),
+      new VirusData("Aug", 0),
+      new VirusData("Sep", 0),
+      new VirusData("Oct", 0),
+      new VirusData("Nov", 0),
+      new VirusData("Dec", 0),
     ];
 
-    final tablepeopleData = [
+    final recoveredPeopleData = [
       new VirusData('Jan', 10000),
       new VirusData('Feb', 50),
       new VirusData('Mar', 10),
-      new VirusData('April', 20),
+      new VirusData("Apr", 0),
+      new VirusData("May", 0),
+      new VirusData("Jun", 0),
+      new VirusData("Jul", 0),
+      new VirusData("Aug", 0),
+      new VirusData("Sep", 0),
+      new VirusData("Oct", 0),
+      new VirusData("Nov", 0),
+      new VirusData("Dec", 0),
     ];
 
-    final mobilepeopleData = [
-      new VirusData('Jan', 10),
+    final deadPeopleData = [
+      new VirusData('Jan', 9000),
       new VirusData('Feb', 15),
       new VirusData('Mar', 50),
-      new VirusData('April', 45),
+      new VirusData("Apr", 0),
+      new VirusData("May", 0),
+      new VirusData("Jun", 0),
+      new VirusData("Jul", 0),
+      new VirusData("Aug", 0),
+      new VirusData("Sep", 0),
+      new VirusData("Oct", 0),
+      new VirusData("Nov", 0),
+      new VirusData("Dec", 0),
     ];
 
     return [
@@ -54,19 +78,25 @@ class CasesBarChart extends StatelessWidget {
         id: 'Desktop',
         domainFn: (VirusData people, _) => people.month,
         measureFn: (VirusData people, _) => people.people,
-        data: desktoppeopleData,
+        data: infectedPeopleData,
+        colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
+        fillColorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault.darker,
       ),
       new charts.Series<VirusData, String>(
         id: 'Tablet',
         domainFn: (VirusData people, _) => people.month,
         measureFn: (VirusData people, _) => people.people,
-        data: tablepeopleData,
+        data: recoveredPeopleData,
+        colorFn: (_, __) => charts.MaterialPalette.green.shadeDefault,
+        fillColorFn: (_, __) => charts.MaterialPalette.green.shadeDefault.darker,
       ),
       new charts.Series<VirusData, String>(
         id: 'Mobile',
         domainFn: (VirusData people, _) => people.month,
         measureFn: (VirusData people, _) => people.people,
-        data: mobilepeopleData,
+        data: deadPeopleData,
+        colorFn: (_, __) => charts.MaterialPalette.green.shadeDefault,
+        fillColorFn: (_, __) => charts.MaterialPalette.red.shadeDefault.darker,
       ),
     ];
   }

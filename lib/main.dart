@@ -1,5 +1,6 @@
 import 'package:covid19/cases_bar_chart.dart';
 import 'package:covid19/resources/app_colors.dart';
+import 'package:covid19/resources/cases_gauge_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 
@@ -78,7 +79,7 @@ class Home extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                            "Cases",
+                            "Cases (2020)",
                             style: TextStyle(
                               color: AppColors.BLUE,
                               fontSize: 14
@@ -114,12 +115,13 @@ class Home extends StatelessWidget {
                                 "Infected",
                               ),
                               SizedBox(height: 12),
-                              Container(
-                                height: 96,
-                                color: Colors.black12
+                              AspectRatio(
+                                aspectRatio: 1,
+                                child: GaugeChart.withSampleData(),
                               ),
                               SizedBox(height: 12),
-                              Text("100%")
+                              Text("311,989"),
+                              Text(""),
                             ],
                           )
                         ),
@@ -140,7 +142,8 @@ class Home extends StatelessWidget {
                                 color: Colors.black12
                               ),
                               SizedBox(height: 12),
-                              Text("48%")
+                              Text("93,790"),
+                              Text("48%"),
                             ],
                           )
                         ),
@@ -162,7 +165,8 @@ class Home extends StatelessWidget {
                                 color: Colors.black12
                               ),
                               SizedBox(height: 12),
-                              Text("2.3%")
+                              Text("13,407"),
+                              Text("2.3%"),
                             ],
                           )
                         ),
