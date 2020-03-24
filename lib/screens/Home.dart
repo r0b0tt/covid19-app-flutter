@@ -1,58 +1,23 @@
 import 'package:covid19/cases_bar_chart.dart';
 import 'package:covid19/cases_gauge_chart.dart';
+import 'package:covid19/components/BottomNavBar.dart';
+import 'package:covid19/components/TopNavBar.dart';
 import 'package:covid19/resources/app_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 
 class Home extends StatelessWidget {
+  static const cardTitleStyles = TextStyle(color: AppColors.BLUE, fontSize: 14);
+  static const patientsNumberStyle =
+      TextStyle(fontSize: 16, fontWeight: FontWeight.w500);
+
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return Scaffold(
+      body: SafeArea(
         child: Container(
           child: ListView(
             children: <Widget>[
-              Container(
-                margin: EdgeInsets.only(bottom: 12),
-                padding: EdgeInsets.symmetric(horizontal: 16),
-                height: 48,
-                alignment: Alignment.centerLeft,
-                decoration: BoxDecoration(color: Colors.white, boxShadow: [
-                  BoxShadow(
-                    color: Colors.black12,
-                    spreadRadius: 0,
-                    blurRadius: 6,
-                    offset: Offset(0, 7),
-                  )
-                ]),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Container(
-                      child: Row(
-                        children: <Widget>[
-                          Image(
-                            image: AssetImage('assets/images/icon.png'),
-                            width: 36,
-                            height: 36,
-                            fit: BoxFit.contain,
-                          ),
-                          SizedBox(
-                            width: 12,
-                          ),
-                          Text(
-                            "Covid-19",
-                            style: TextStyle(
-                              color: AppColors.PRIMARY,
-                              fontSize: 16,
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    Icon(Ionicons.ios_moon)
-                  ],
-                ),
-              ),
+              TopNavBar(),
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 16),
                 child: Card(
@@ -64,8 +29,7 @@ class Home extends StatelessWidget {
                           children: <Widget>[
                             Text(
                               "Cases (2020)",
-                              style: TextStyle(
-                                  color: AppColors.BLUE, fontSize: 14),
+                              style: cardTitleStyles,
                             ),
                             SizedBox(height: 12),
                             AspectRatio(
@@ -83,97 +47,88 @@ class Home extends StatelessWidget {
                     children: <Widget>[
                       Expanded(
                           child: Card(
-                            elevation: 5,
-                            child: Container(
-                                padding: EdgeInsets.all(12),
-                                child: Column(
-                                  children: <Widget>[
-                                    Text(
-                                      "Infected",
-                                      style: TextStyle(
-                                        color: Colors.black87,
-                                      ),
-                                    ),
-                                    SizedBox(height: 12),
-                                    AspectRatio(
-                                      aspectRatio: 1,
-                                      child: GaugeChart.withSampleData("infected"),
-                                    ),
-                                    SizedBox(height: 12),
-                                    Text(
-                                      "311,989",
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    SizedBox(height: 8),
-                                    Text(""),
-                                  ],
-                                )),
-                          )),
+                        elevation: 5,
+                        child: Container(
+                            padding: EdgeInsets.all(12),
+                            child: Column(
+                              children: <Widget>[
+                                Text(
+                                  "Infected",
+                                  style: cardTitleStyles,
+                                ),
+                                SizedBox(height: 12),
+                                AspectRatio(
+                                  aspectRatio: 1,
+                                  child: GaugeChart.withSampleData("infected"),
+                                ),
+                                SizedBox(height: 12),
+                                Text(
+                                  "311,989",
+                                  style: patientsNumberStyle,
+                                ),
+                                SizedBox(height: 8),
+                                Text(""),
+                              ],
+                            )),
+                      )),
                       Expanded(
                           child: Card(
-                            elevation: 5,
-                            child: Container(
-                                padding: EdgeInsets.all(12),
-                                child: Column(
-                                  children: <Widget>[
-                                    Text(
-                                      "Recovered",
-                                      style: TextStyle(
-                                        color: Colors.black87,
-                                      ),
-                                    ),
-                                    SizedBox(height: 12),
-                                    AspectRatio(
-                                      aspectRatio: 1,
-                                      child: GaugeChart.withSampleData("recovered"),
-                                    ),
-                                    SizedBox(height: 12),
-                                    Text(
-                                      "93,790",
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    SizedBox(height: 8),
-                                    Text(
-                                      "48%",
-                                      style: TextStyle(color: Colors.green),
-                                    ),
-                                  ],
-                                )),
-                          )),
+                        elevation: 5,
+                        child: Container(
+                            padding: EdgeInsets.all(12),
+                            child: Column(
+                              children: <Widget>[
+                                Text(
+                                  "Recovered",
+                                  style: cardTitleStyles,
+                                ),
+                                SizedBox(height: 12),
+                                AspectRatio(
+                                  aspectRatio: 1,
+                                  child: GaugeChart.withSampleData("recovered"),
+                                ),
+                                SizedBox(height: 12),
+                                Text(
+                                  "93,790",
+                                  style: patientsNumberStyle,
+                                ),
+                                SizedBox(height: 8),
+                                Text(
+                                  "48%",
+                                  style: TextStyle(color: Colors.green),
+                                ),
+                              ],
+                            )),
+                      )),
                       Expanded(
                           child: Card(
-                            elevation: 5,
-                            child: Container(
-                                padding: EdgeInsets.all(12),
-                                child: Column(
-                                  children: <Widget>[
-                                    Text(
-                                      "Dead",
-                                    ),
-                                    SizedBox(height: 12),
-                                    AspectRatio(
-                                      aspectRatio: 1,
-                                      child: GaugeChart.withSampleData("dead"),
-                                    ),
-                                    SizedBox(height: 12),
-                                    Text(
-                                      "13,407",
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    SizedBox(height: 8),
-                                    Text(
-                                      "2.3%",
-                                      style: TextStyle(color: Colors.red),
-                                    ),
-                                  ],
-                                )),
-                          )),
+                        elevation: 5,
+                        child: Container(
+                            padding: EdgeInsets.all(12),
+                            child: Column(
+                              children: <Widget>[
+                                Text(
+                                  "Dead",
+                                  style: cardTitleStyles,
+                                ),
+                                SizedBox(height: 12),
+                                AspectRatio(
+                                  aspectRatio: 1,
+                                  child: GaugeChart.withSampleData("dead"),
+                                ),
+                                SizedBox(height: 12),
+                                Text(
+                                  "13,407",
+                                  style: patientsNumberStyle,
+                                ),
+                                SizedBox(height: 8),
+                                Text(
+                                  "2.3%",
+                                  style: TextStyle(color: Colors.red),
+                                ),
+                              ],
+                            )),
+                      )),
                     ],
                   )),
               SizedBox(height: 12),
@@ -204,51 +159,70 @@ class Home extends StatelessWidget {
                             SizedBox(height: 12),
                             Container(
                                 child: SingleChildScrollView(
-                                  child: DataTable(
-                                    columnSpacing: 8,
-                                    columns: [
-                                      DataColumn(
-                                        label: Text("Country"),
-
-                                      ),
-                                      DataColumn(label: Text("Infected")),
-                                      DataColumn(label: Text("Recovered")),
-                                      DataColumn(label: Text("Dead")),
-                                    ],
-                                    rows: [
-                                      DataRow(cells: [
-                                        DataCell(Text("China", style: TextStyle(fontWeight: FontWeight.w500),)),
-                                        DataCell(Text("123,000")),
-                                        DataCell(Text("101,000")),
-                                        DataCell(Text("11,000")),
-                                      ]),
-                                      DataRow(cells: [
-                                        DataCell(Text("Italy", style: TextStyle(fontWeight: FontWeight.w500),)),
-                                        DataCell(Text("101,000")),
-                                        DataCell(Text("56,000")),
-                                        DataCell(Text("5,000")),
-                                      ]),
-                                      DataRow(cells: [
-                                        DataCell(Text("USA", style: TextStyle(fontWeight: FontWeight.w500),)),
-                                        DataCell(Text("97,000")),
-                                        DataCell(Text("48,000")),
-                                        DataCell(Text("1,000")),
-                                      ]),
-                                      DataRow(cells: [
-                                        DataCell(Text("South Korea", style: TextStyle(fontWeight: FontWeight.w500),)),
-                                        DataCell(Text("88,000")),
-                                        DataCell(Text("20,000")),
-                                        DataCell(Text("3,000")),
-                                      ]),
-                                      DataRow(cells: [
-                                        DataCell(Text("Mexico", style: TextStyle(fontWeight: FontWeight.w500),)),
-                                        DataCell(Text("56,000")),
-                                        DataCell(Text("36,000")),
-                                        DataCell(Text("500")),
-                                      ]),
-                                    ],
+                              child: DataTable(
+                                columnSpacing: 8,
+                                columns: [
+                                  DataColumn(
+                                    label: Text("Country"),
                                   ),
-                                )),
+                                  DataColumn(label: Text("Infected")),
+                                  DataColumn(label: Text("Recovered")),
+                                  DataColumn(label: Text("Dead")),
+                                ],
+                                rows: [
+                                  DataRow(cells: [
+                                    DataCell(Text(
+                                      "China",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w500),
+                                    )),
+                                    DataCell(Text("123,000")),
+                                    DataCell(Text("101,000")),
+                                    DataCell(Text("11,000")),
+                                  ]),
+                                  DataRow(cells: [
+                                    DataCell(Text(
+                                      "Italy",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w500),
+                                    )),
+                                    DataCell(Text("101,000")),
+                                    DataCell(Text("56,000")),
+                                    DataCell(Text("5,000")),
+                                  ]),
+                                  DataRow(cells: [
+                                    DataCell(Text(
+                                      "USA",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w500),
+                                    )),
+                                    DataCell(Text("97,000")),
+                                    DataCell(Text("48,000")),
+                                    DataCell(Text("1,000")),
+                                  ]),
+                                  DataRow(cells: [
+                                    DataCell(Text(
+                                      "South Korea",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w500),
+                                    )),
+                                    DataCell(Text("88,000")),
+                                    DataCell(Text("20,000")),
+                                    DataCell(Text("3,000")),
+                                  ]),
+                                  DataRow(cells: [
+                                    DataCell(Text(
+                                      "Mexico",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w500),
+                                    )),
+                                    DataCell(Text("56,000")),
+                                    DataCell(Text("36,000")),
+                                    DataCell(Text("500")),
+                                  ]),
+                                ],
+                              ),
+                            )),
                           ],
                         ))),
               ),
@@ -281,6 +255,8 @@ class Home extends StatelessWidget {
             ],
           ),
         ),
-      );
+      ),
+      bottomNavigationBar: BottomNavBar(),
+    );
   }
 }

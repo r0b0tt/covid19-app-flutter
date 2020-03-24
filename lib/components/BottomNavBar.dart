@@ -1,4 +1,8 @@
 import 'package:covid19/resources/app_colors.dart';
+import 'package:covid19/screens/About.dart';
+import 'package:covid19/screens/Countries.dart';
+import 'package:covid19/screens/FAQs.dart';
+import 'package:covid19/screens/Home.dart';
 import 'package:flutter/material.dart';
 
 class BottomNavBar extends StatefulWidget {
@@ -12,6 +16,13 @@ class _BottomNavBarState extends State<BottomNavBar> {
   int _selectedIndex = 0;
 
   void _onItemTapped(int index) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => index == 0
+              ? Home()
+              : index == 1 ? Countries() : index == 2 ? Faqs() : About()),
+    );
     setState(() {
       _selectedIndex = index;
     });
