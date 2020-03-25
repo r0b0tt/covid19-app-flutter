@@ -1,4 +1,3 @@
-import 'package:covid19/components/BottomNavBar.dart';
 import 'package:covid19/components/TopNavBar.dart';
 import 'package:covid19/resources/app_colors.dart';
 import 'package:flutter/material.dart';
@@ -8,17 +7,17 @@ class About extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Scaffold(
-      body: SafeArea(
-        child: Container(
-          child: ListView(
-            children: <Widget>[
-              TopNavBar(),
-              Card(
+    return SafeArea(
+      child: Container(
+        child: Column(
+          children: <Widget>[
+            TopNavBar(),
+            Expanded(
+              child: Card(
                 margin: EdgeInsets.all(16),
                 child: Padding(
                   padding: EdgeInsets.all(16),
-                  child: Column(
+                  child: ListView(
                     children: <Widget>[
                       _Section("Name", "Covid-19 App"),
                       SizedBox(
@@ -54,12 +53,11 @@ class About extends StatelessWidget {
                     ],
                   ),
                 ),
-              )
-            ],
-          ),
+              ),
+            )
+          ],
         ),
       ),
-      bottomNavigationBar: BottomNavBar(),
     );
   }
 }
