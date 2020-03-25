@@ -8,7 +8,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: true,
+        theme: ThemeData(primaryColor: Colors.white),
         title: "Covid-19 App",
-        home: BottomNavBar());
+        home: Navigation());
   }
 }

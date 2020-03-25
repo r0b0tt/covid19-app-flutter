@@ -1,5 +1,6 @@
 import 'package:covid19/components/TopNavBar.dart';
 import 'package:covid19/resources/app_colors.dart';
+import 'package:covid19/screens/Country.dart';
 import 'package:flutter/material.dart';
 
 class Countries extends StatelessWidget {
@@ -57,13 +58,38 @@ class Countries extends StatelessWidget {
                             ],
                             rows: [
                               DataRow(cells: [
-                                DataCell(Text(
-                                  "China",
-                                  style: TextStyle(fontWeight: FontWeight.w500),
+                                DataCell(GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => Country()));
+                                  },
+                                  child: Text(
+                                    "China",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w500,
+                                        color: Colors.blueAccent),
+                                  ),
                                 )),
-                                DataCell(Text("123,000")),
-                                DataCell(Text("101,000")),
-                                DataCell(Text("11,000")),
+                                DataCell(GestureDetector(
+                                  onTap: () {
+                                    print("Navigate");
+                                  },
+                                  child: Text("123,000"),
+                                )),
+                                DataCell(GestureDetector(
+                                  onTap: () {
+                                    print("Navigate");
+                                  },
+                                  child: Text("101,000"),
+                                )),
+                                DataCell(GestureDetector(
+                                  onTap: () {
+                                    print("Navigate");
+                                  },
+                                  child: Text("11,000"),
+                                )),
                               ]),
                               DataRow(cells: [
                                 DataCell(Text(

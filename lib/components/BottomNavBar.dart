@@ -5,14 +5,14 @@ import 'package:covid19/screens/FAQs.dart';
 import 'package:covid19/screens/Home.dart';
 import 'package:flutter/material.dart';
 
-class BottomNavBar extends StatefulWidget {
-  BottomNavBar({Key key}) : super(key: key);
+class Navigation extends StatefulWidget {
+  Navigation({Key key}) : super(key: key);
 
   @override
-  _BottomNavBarState createState() => _BottomNavBarState();
+  _NavigationState createState() => _NavigationState();
 }
 
-class _BottomNavBarState extends State<BottomNavBar> {
+class _NavigationState extends State<Navigation> {
   int _selectedIndex = 0;
 
   final routes = [Home(), Countries(), Faqs(), About()];
