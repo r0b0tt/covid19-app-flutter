@@ -1,4 +1,4 @@
-import 'package:covid19/resources/app_colors.dart';
+import 'package:covid19/assets/app_colors.dart';
 import 'package:covid19/screens/About.dart';
 import 'package:covid19/screens/Countries.dart';
 import 'package:covid19/screens/FAQs.dart';

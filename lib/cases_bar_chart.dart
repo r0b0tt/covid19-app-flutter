@@ -1,6 +1,5 @@
-import 'package:covid19/resources/app_colors.dart';
-import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:flutter/material.dart';
 
 class CasesBarChart extends StatelessWidget {
   final List<charts.Series> seriesList;
@@ -88,7 +87,8 @@ class CasesBarChart extends StatelessWidget {
         measureFn: (VirusData people, _) => people.people,
         data: recoveredPeopleData,
         colorFn: (_, __) => charts.MaterialPalette.green.shadeDefault,
-        fillColorFn: (_, __) => charts.MaterialPalette.green.shadeDefault.darker,
+        fillColorFn: (_, __) =>
+            charts.MaterialPalette.green.shadeDefault.darker,
       ),
       new charts.Series<VirusData, String>(
         id: 'Mobile',

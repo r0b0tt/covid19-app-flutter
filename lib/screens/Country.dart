@@ -1,6 +1,6 @@
+import 'package:covid19/assets/app_colors.dart';
 import 'package:covid19/cases_bar_chart.dart';
 import 'package:covid19/cases_gauge_chart.dart';
-import 'package:covid19/resources/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class Country extends StatelessWidget {

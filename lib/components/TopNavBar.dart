@@ -1,4 +1,4 @@
-import 'package:covid19/resources/app_colors.dart';
+import 'package:covid19/assets/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 
