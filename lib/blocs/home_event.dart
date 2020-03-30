@@ -8,6 +8,5 @@ class FetchHomeData extends HomeEvent {
   const FetchHomeData();
 
   @override
-  // TODO: implement props
   List<Object> get props => [];
 }

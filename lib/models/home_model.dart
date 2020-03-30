@@ -29,7 +29,6 @@ class HomeModel extends Equatable {
         percentageFormat.format((recovered / confirmed) * 100);
     final String deathPercentage =
         percentageFormat.format((deaths / confirmed) * 100);
-    print(recoveredPercentage);
     return HomeModel(
         confirmed: numberFormat.format(confirmed),
         recovered: numberFormat.format(recovered),
