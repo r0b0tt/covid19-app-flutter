@@ -1,4 +1,5 @@
 import 'package:covid19/components/TopNavBar.dart';
+import 'package:covid19/screens/FAQ.dart';
 import 'package:flutter/material.dart';
 
 class Faqs extends StatelessWidget {
@@ -15,21 +16,27 @@ class Faqs extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
-                  Card(
-                    elevation: 2,
-                    child: Padding(
-                      padding: EdgeInsets.all((12)),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Expanded(
-                            child: Text(
-                                "lorem ipsum dolor il summet lorem ipsum dolor ill summet"),
-                          ),
-                          Padding(
-                              padding: EdgeInsets.only(left: 12),
-                              child: Icon(Icons.chevron_right))
-                        ],
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Faq()));
+                    },
+                    child: Card(
+                      elevation: 2,
+                      child: Padding(
+                        padding: EdgeInsets.all((12)),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Expanded(
+                              child: Text(
+                                  "lorem ipsum dolor il summet lorem ipsum dolor ill summet"),
+                            ),
+                            Padding(
+                                padding: EdgeInsets.only(left: 12),
+                                child: Icon(Icons.chevron_right))
+                          ],
+                        ),
                       ),
                     ),
                   ),
