@@ -1,11 +1,9 @@
-import 'package:covid19/assets/app_colors.dart';
 import 'package:covid19/blocs/countries_bloc.dart';
 import 'package:covid19/blocs/data_events.dart';
 import 'package:covid19/blocs/data_state.dart';
 import 'package:covid19/components/TopNavBar.dart';
 import 'package:covid19/repositories/data_api_client.dart';
 import 'package:covid19/repositories/repository.dart';
-import 'package:covid19/screens/Country.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart';
@@ -20,10 +18,11 @@ class Countries extends StatelessWidget {
           CountriesBloc(countriesRepository: countriesRepository),
       child: SafeArea(
         child: Container(
-          child: ListView(
+          child: Column(
             children: <Widget>[
               TopNavBar(),
-              Container(
+              Expanded(
+                  child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 16),
                 child: BlocBuilder<CountriesBloc, DataState>(
                   builder: (context, state) {
@@ -37,6 +36,28 @@ class Countries extends StatelessWidget {
                       );
                     }
                     if (state is CountriesLoaded) {
+                      List<Widget> countries = [];
+                      for (var country in state.countriesModel.countries) {
+                        String countryName = country["name"];
+                        String countryIso2 = country["iso2"];
+                        countries.add(Card(
+                          child: Container(
+                            padding: EdgeInsets.all(8),
+                            child: Column(
+                              children: <Widget>[
+                                Expanded(
+                                  child: Image.network(
+                                    'https://www.countryflags.io/$countryIso2/shiny/64.png',
+                                    fit: BoxFit.fill,
+                                  ),
+                                ),
+                                Text(countryName)
+                              ],
+                            ),
+                          ),
+                        ));
+                      }
+
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
@@ -52,206 +73,18 @@ class Countries extends StatelessWidget {
                               ),
                             ),
                           ),
-                          SizedBox(
-                            height: 12,
-                          ),
-                          Card(
-                            elevation: 2,
+                          SizedBox(height: 12),
+                          Expanded(
                             child: Padding(
                               padding: EdgeInsets.all(12),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.stretch,
-                                children: <Widget>[
-                                  Text(
-                                    "Countries",
-                                    style: TextStyle(
-                                        color: AppColors.BLUE, fontSize: 14),
-                                  ),
-                                  SizedBox(
-                                    height: 8,
-                                  ),
-                                  DataTable(
-                                    columnSpacing: 8,
-                                    columns: [
-                                      DataColumn(
-                                        label: Text("Country"),
-                                      ),
-                                      DataColumn(label: Text("Infected")),
-                                      DataColumn(label: Text("Recovered")),
-                                      DataColumn(label: Text("Dead")),
-                                    ],
-                                    rows: [
-                                      DataRow(cells: [
-                                        DataCell(GestureDetector(
-                                          onTap: () {
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        Country()));
-                                          },
-                                          child: Text(
-                                            "China",
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.w500,
-                                                color: Colors.blueAccent),
-                                          ),
-                                        )),
-                                        DataCell(GestureDetector(
-                                          onTap: () {
-                                            print("Navigate");
-                                          },
-                                          child: Text("123,000"),
-                                        )),
-                                        DataCell(GestureDetector(
-                                          onTap: () {
-                                            print("Navigate");
-                                          },
-                                          child: Text("101,000"),
-                                        )),
-                                        DataCell(GestureDetector(
-                                          onTap: () {
-                                            print("Navigate");
-                                          },
-                                          child: Text("11,000"),
-                                        )),
-                                      ]),
-                                      DataRow(cells: [
-                                        DataCell(Text(
-                                          "China",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.w500),
-                                        )),
-                                        DataCell(Text("123,000")),
-                                        DataCell(Text("101,000")),
-                                        DataCell(Text("11,000")),
-                                      ]),
-                                      DataRow(cells: [
-                                        DataCell(Text(
-                                          "China",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.w500),
-                                        )),
-                                        DataCell(Text("123,000")),
-                                        DataCell(Text("101,000")),
-                                        DataCell(Text("11,000")),
-                                      ]),
-                                      DataRow(cells: [
-                                        DataCell(Text(
-                                          "China",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.w500),
-                                        )),
-                                        DataCell(Text("123,000")),
-                                        DataCell(Text("101,000")),
-                                        DataCell(Text("11,000")),
-                                      ]),
-                                      DataRow(cells: [
-                                        DataCell(Text(
-                                          "China",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.w500),
-                                        )),
-                                        DataCell(Text("123,000")),
-                                        DataCell(Text("101,000")),
-                                        DataCell(Text("11,000")),
-                                      ]),
-                                      DataRow(cells: [
-                                        DataCell(Text(
-                                          "China",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.w500),
-                                        )),
-                                        DataCell(Text("123,000")),
-                                        DataCell(Text("101,000")),
-                                        DataCell(Text("11,000")),
-                                      ]),
-                                      DataRow(cells: [
-                                        DataCell(Text(
-                                          "China",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.w500),
-                                        )),
-                                        DataCell(Text("123,000")),
-                                        DataCell(Text("101,000")),
-                                        DataCell(Text("11,000")),
-                                      ]),
-                                      DataRow(cells: [
-                                        DataCell(Text(
-                                          "China",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.w500),
-                                        )),
-                                        DataCell(Text("123,000")),
-                                        DataCell(Text("101,000")),
-                                        DataCell(Text("11,000")),
-                                      ]),
-                                      DataRow(cells: [
-                                        DataCell(Text(
-                                          "China",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.w500),
-                                        )),
-                                        DataCell(Text("123,000")),
-                                        DataCell(Text("101,000")),
-                                        DataCell(Text("11,000")),
-                                      ]),
-                                      DataRow(cells: [
-                                        DataCell(Text(
-                                          "China",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.w500),
-                                        )),
-                                        DataCell(Text("123,000")),
-                                        DataCell(Text("101,000")),
-                                        DataCell(Text("11,000")),
-                                      ]),
-                                      DataRow(cells: [
-                                        DataCell(Text(
-                                          "China",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.w500),
-                                        )),
-                                        DataCell(Text("123,000")),
-                                        DataCell(Text("101,000")),
-                                        DataCell(Text("11,000")),
-                                      ]),
-                                      DataRow(cells: [
-                                        DataCell(Text(
-                                          "China",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.w500),
-                                        )),
-                                        DataCell(Text("123,000")),
-                                        DataCell(Text("101,000")),
-                                        DataCell(Text("11,000")),
-                                      ]),
-                                      DataRow(cells: [
-                                        DataCell(Text(
-                                          "China",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.w500),
-                                        )),
-                                        DataCell(Text("123,000")),
-                                        DataCell(Text("101,000")),
-                                        DataCell(Text("11,000")),
-                                      ]),
-                                      DataRow(cells: [
-                                        DataCell(Text(
-                                          "China",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.w500),
-                                        )),
-                                        DataCell(Text("123,000")),
-                                        DataCell(Text("101,000")),
-                                        DataCell(Text("11,000")),
-                                      ]),
-                                    ],
-                                  )
-                                ],
+                              child: GridView.count(
+                                crossAxisCount: 3,
+                                crossAxisSpacing: 12,
+                                mainAxisSpacing: 12,
+                                children: countries,
                               ),
                             ),
-                          )
+                          ),
                         ],
                       );
                     }
@@ -260,7 +93,7 @@ class Countries extends StatelessWidget {
                     );
                   },
                 ),
-              )
+              ))
             ],
           ),
         ),
