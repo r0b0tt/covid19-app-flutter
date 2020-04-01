@@ -9,7 +9,6 @@ class CountriesModel extends Equatable {
   List<Object> get props => [countries];
 
   static CountriesModel fromJson(dynamic json) {
-    print(json['countries']);
     return CountriesModel(countries: json['countries']);
   }
 }

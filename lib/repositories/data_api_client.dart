@@ -36,4 +36,17 @@ class DataApiClient {
 
     return CountriesModel.fromJson(json);
   }
+
+  Future<CountryModel> fetchCountry(String countryName) async {
+    final url = "$_baseUrl/countries/$countryName";
+    final response = await this.httpClient.get(url);
+
+    if (response.statusCode != 200) {
+      throw new Exception("An error occurred fetching country data");
+    }
+
+    final json = jsonDecode(response.body);
+
+    return CountryModel.fromJson(json);
+  }
 }

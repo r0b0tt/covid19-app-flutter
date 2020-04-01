@@ -1,14 +1,14 @@
 import 'package:equatable/equatable.dart';
 import 'package:intl/intl.dart';
 
-class HomeModel extends Equatable {
+class CountryModel extends Equatable {
   final String confirmed;
   final String recovered;
   final String deaths;
   final recoveredPercentage;
   final deathPercentage;
 
-  const HomeModel(
+  const CountryModel(
       {this.confirmed,
       this.recovered,
       this.deaths,
@@ -19,7 +19,7 @@ class HomeModel extends Equatable {
   List<Object> get props =>
       [confirmed, recovered, deaths, recoveredPercentage, deathPercentage];
 
-  static HomeModel fromJson(dynamic json) {
+  static CountryModel fromJson(dynamic json) {
     final numberFormat = NumberFormat.compact();
     var percentageFormat = new NumberFormat("#.00", "en_US");
 
@@ -30,15 +30,11 @@ class HomeModel extends Equatable {
         percentageFormat.format((recovered / confirmed) * 100);
     final String deathPercentage =
         percentageFormat.format((deaths / confirmed) * 100);
-    return HomeModel(
+    return CountryModel(
         confirmed: numberFormat.format(confirmed),
         recovered: numberFormat.format(recovered),
         deaths: numberFormat.format(deaths),
         recoveredPercentage: "$recoveredPercentage%",
         deathPercentage: "$deathPercentage%");
   }
-
-  @override
-  String toString() =>
-      'Data {confirmed: $confirmed, recovered: $recovered, deaths: $deaths}';
 }

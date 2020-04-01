@@ -22,4 +22,13 @@ class CountriesLoaded extends DataState {
   List<Object> get props => [countriesModel];
 }
 
+class CountryLoaded extends DataState {
+  final CountryModel countryModel;
+
+  const CountryLoaded({@required this.countryModel});
+
+  @override
+  List<Object> get props => [countryModel];
+}
+
 class DataError extends DataState {}

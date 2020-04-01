@@ -10,3 +10,10 @@ class FetchCountriesData extends DataEvent {
   @override
   List<Object> get props => [];
 }
+
+class FetchCountryData extends DataEvent {
+  const FetchCountryData();
+
+  @override
+  List<Object> get props => [];
+}
