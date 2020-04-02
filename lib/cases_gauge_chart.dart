@@ -1,14 +1,14 @@
 import 'dart:math';
 
-import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:flutter/material.dart';
 
 class GaugeChart extends StatelessWidget {
   final List<charts.Series> seriesList;
   final bool animate;
   final String type;
 
-  GaugeChart(this.seriesList,this.type, {this.animate});
+  GaugeChart(this.seriesList, this.type, {this.animate});
 
   /// Creates a [PieChart] with sample data and no transition.
   factory GaugeChart.withSampleData(String type) {

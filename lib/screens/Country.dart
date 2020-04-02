@@ -4,23 +4,15 @@ import 'package:covid19/blocs/data_events.dart';
 import 'package:covid19/blocs/data_state.dart';
 import 'package:covid19/cases_bar_chart.dart';
 import 'package:covid19/cases_gauge_chart.dart';
-import 'package:covid19/repositories/data_api_client.dart';
 import 'package:covid19/repositories/repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:http/http.dart';
 
 class Country extends StatelessWidget {
   final String countryName;
+  final CountryRepository countryRepository;
 
-  Country({@required this.countryName});
-
-  final CountryRepository countryRepository = CountryRepository(
-    countryName: "Kenya",
-    dataApiClient: DataApiClient(
-      httpClient: Client(),
-    ),
-  );
+  Country({@required this.countryName, @required this.countryRepository});
 
   static const cardTitleStyles = TextStyle(color: AppColors.BLUE, fontSize: 14);
   static const patientsNumberStyle =

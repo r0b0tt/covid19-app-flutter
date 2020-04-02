@@ -15,8 +15,9 @@ class Countries extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          CountriesBloc(countriesRepository: countriesRepository),
+      create: (context) => CountriesBloc(
+        countriesRepository: countriesRepository,
+      ),
       child: SafeArea(
         child: Container(
           child: Column(
@@ -24,7 +25,9 @@ class Countries extends StatelessWidget {
               TopNavBar(),
               Expanded(
                   child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 16),
+                padding: EdgeInsets.symmetric(
+                  horizontal: 16,
+                ),
                 child: BlocBuilder<CountriesBloc, DataState>(
                   builder: (context, state) {
                     if (state is DataEmpty) {
@@ -44,11 +47,19 @@ class Countries extends StatelessWidget {
                         countries.add(
                           GestureDetector(
                             onTap: () {
+                              final CountryRepository countryRepository =
+                                  CountryRepository(
+                                countryName: countryName,
+                                dataApiClient: DataApiClient(
+                                  httpClient: Client(),
+                                ),
+                              );
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => Country(
                                     countryName: countryName,
+                                    countryRepository: countryRepository,
                                   ),
                                 ),
                               );
@@ -64,7 +75,10 @@ class Countries extends StatelessWidget {
                                         fit: BoxFit.fill,
                                       ),
                                     ),
-                                    Text(countryName)
+                                    Text(
+                                      countryName,
+                                      textAlign: TextAlign.center,
+                                    )
                                   ],
                                 ),
                               ),
@@ -90,14 +104,11 @@ class Countries extends StatelessWidget {
                           ),
                           SizedBox(height: 12),
                           Expanded(
-                            child: Padding(
-                              padding: EdgeInsets.all(12),
-                              child: GridView.count(
-                                crossAxisCount: 3,
-                                crossAxisSpacing: 12,
-                                mainAxisSpacing: 12,
-                                children: countries,
-                              ),
+                            child: GridView.count(
+                              crossAxisCount: 3,
+                              crossAxisSpacing: 12,
+                              mainAxisSpacing: 12,
+                              children: countries,
                             ),
                           ),
                         ],
