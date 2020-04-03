@@ -21,7 +21,7 @@ class HomeModel extends Equatable {
 
   static HomeModel fromJson(dynamic json) {
     final numberFormat = NumberFormat.compact();
-    var percentageFormat = new NumberFormat("#.00", "en_US");
+    var percentageFormat = new NumberFormat("#0.0s", "en_US");
 
     final int confirmed = json['confirmed']['value'];
     final int recovered = json['recovered']['value'];
