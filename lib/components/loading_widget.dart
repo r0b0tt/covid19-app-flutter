@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
 class LoadingWidget extends StatelessWidget {
+  final String text;
+
+  LoadingWidget({this.text});
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -14,7 +18,7 @@ class LoadingWidget extends StatelessWidget {
             ),
             SizedBox(height: 8),
             Text(
-              "Loading...",
+              text != null ? text : "Loading...",
               textAlign: TextAlign.center,
             ),
           ],
