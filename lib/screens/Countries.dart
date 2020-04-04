@@ -1,7 +1,6 @@
 import 'package:covid19/blocs/countries_bloc.dart';
 import 'package:covid19/blocs/data_events.dart';
 import 'package:covid19/blocs/data_state.dart';
-import 'package:covid19/components/TopNavBar.dart';
 import 'package:covid19/repositories/data_api_client.dart';
 import 'package:covid19/repositories/repository.dart';
 import 'package:covid19/screens/Country.dart';
@@ -22,7 +21,6 @@ class Countries extends StatelessWidget {
         child: Container(
           child: Column(
             children: <Widget>[
-              TopNavBar(),
               Expanded(
                   child: Container(
                 padding: EdgeInsets.symmetric(
@@ -78,7 +76,7 @@ class Countries extends StatelessWidget {
                                     Text(
                                       countryName,
                                       textAlign: TextAlign.center,
-                                    )
+                                    ),
                                   ],
                                 ),
                               ),

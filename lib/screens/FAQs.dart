@@ -1,4 +1,3 @@
-import 'package:covid19/components/TopNavBar.dart';
 import 'package:covid19/screens/FAQ.dart';
 import 'package:flutter/material.dart';
 
@@ -10,7 +9,6 @@ class Faqs extends StatelessWidget {
       child: Container(
         child: ListView(
           children: <Widget>[
-            TopNavBar(),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16),
               child: Column(

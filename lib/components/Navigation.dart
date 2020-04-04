@@ -26,6 +26,25 @@ class _NavigationState extends State<Navigation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Align(
+          alignment: Alignment.centerLeft,
+          child: Text(
+            "Covid-19",
+            style: TextStyle(
+              color: AppColors.PRIMARY,
+              fontSize: 16,
+            ),
+          ),
+        ),
+        leading: Padding(
+          padding: EdgeInsets.only(left: 16),
+          child: Image(
+            image: AssetImage('assets/images/icon.png'),
+            fit: BoxFit.contain,
+          ),
+        ),
+      ),
       body: routes[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,

@@ -1,5 +1,4 @@
 import 'package:covid19/assets/app_colors.dart';
-import 'package:covid19/components/TopNavBar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 
@@ -11,7 +10,6 @@ class About extends StatelessWidget {
       child: Container(
         child: Column(
           children: <Widget>[
-            TopNavBar(),
             Expanded(
               child: Card(
                 margin: EdgeInsets.all(16),
