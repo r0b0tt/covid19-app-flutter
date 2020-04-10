@@ -30,110 +30,109 @@ class _AboutState extends State<About> {
   @override
   Widget build(BuildContext context) {
     print(_packageInfo.version);
-    return SafeArea(
-      child: Container(
-        child: Column(
-          children: <Widget>[
-            Expanded(
-              child: Card(
-                margin: EdgeInsets.all(16),
-                child: Padding(
-                  padding: EdgeInsets.all(16),
-                  child: ListView(
-                    children: <Widget>[
-                      _Section(
-                        title: "Name",
-                        text: _packageInfo.appName ?? "Covid-19 App",
-                      ),
-                      SizedBox(
-                        height: 24,
-                      ),
-                      _Section(
-                          title: "Version",
-                          text: _packageInfo.version ?? "1.0.0"),
-                      SizedBox(
-                        height: 24,
-                      ),
-                      _Section(
-                          title: "Developer",
-                          text: "Terra Innovations",
-                          link: "https://terrainnovations.co"),
-                      SizedBox(
-                        height: 24,
-                      ),
-                      _Section(
-                        title: "Contact",
-                        text: "antonio@terrainnovations.co",
-                      ),
-                      SizedBox(
-                        height: 24,
-                      ),
-                      Column(
-                        children: <Widget>[
-                          Text(
-                            "DATA SOURCE",
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                              color: AppColors.BLUE,
-                            ),
+    return Container(
+      color: AppColors.GREY,
+      child: Column(
+        children: <Widget>[
+          Expanded(
+            child: Card(
+              margin: EdgeInsets.all(16),
+              child: Padding(
+                padding: EdgeInsets.all(16),
+                child: ListView(
+                  children: <Widget>[
+                    _Section(
+                      title: "Name",
+                      text: _packageInfo.appName ?? "Covid-19 App",
+                    ),
+                    SizedBox(
+                      height: 24,
+                    ),
+                    _Section(
+                        title: "Version",
+                        text: _packageInfo.version ?? "1.0.0"),
+                    SizedBox(
+                      height: 24,
+                    ),
+                    _Section(
+                        title: "Developer",
+                        text: "Terra Innovations",
+                        link: "https://terrainnovations.co"),
+                    SizedBox(
+                      height: 24,
+                    ),
+                    _Section(
+                      title: "Contact",
+                      text: "antonio@terrainnovations.co",
+                    ),
+                    SizedBox(
+                      height: 24,
+                    ),
+                    Column(
+                      children: <Widget>[
+                        Text(
+                          "DATA SOURCE",
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                            color: AppColors.BLUE,
                           ),
-                          SizedBox(
-                            height: 8,
+                        ),
+                        SizedBox(
+                          height: 8,
+                        ),
+                        _TextLink(
+                          text: "Johns Hopkins CSSE",
+                          url:
+                              "https://systems.jhu.edu/research/public-health/ncov/",
+                        ),
+                        SizedBox(
+                          height: 4,
+                        ),
+                        _TextLink(
+                          text: "covid19.mathdro.id/api",
+                          url: "https://covid19.mathdro.id/api",
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 24,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: <Widget>[
+                        InkWell(
+                          onTap: () => _launchUrl(
+                              "https://instagram.com/terra_innovations"),
+                          child: Icon(
+                            Ionicons.logo_instagram,
+                            size: 36,
                           ),
-                          _TextLink(
-                            text: "Johns Hopkins CSSE",
-                            url:
-                                "https://systems.jhu.edu/research/public-health/ncov/",
+                        ),
+                        InkWell(
+                          onTap: () =>
+                              _launchUrl("https://twitter.com/__r0b0t__"),
+                          child: Icon(
+                            Ionicons.logo_twitter,
+                            size: 36,
                           ),
-                          SizedBox(
-                            height: 4,
+                        ),
+                        InkWell(
+                          onTap: () => _launchUrl(
+                              "https://github.com/r0b0tt/covid19-app-flutter"),
+                          child: Icon(
+                            Ionicons.logo_github,
+                            size: 36,
                           ),
-                          _TextLink(
-                            text: "covid19.mathdro.id/api",
-                            url: "https://covid19.mathdro.id/api",
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 24,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: <Widget>[
-                          InkWell(
-                            onTap: () => _launchUrl(
-                                "https://instagram.com/terra_innovations"),
-                            child: Icon(
-                              Ionicons.logo_instagram,
-                              size: 36,
-                            ),
-                          ),
-                          InkWell(
-                            onTap: () =>
-                                _launchUrl("https://twitter.com/__r0b0t__"),
-                            child: Icon(
-                              Ionicons.logo_twitter,
-                              size: 36,
-                            ),
-                          ),
-                          InkWell(
-                            onTap: () => _launchUrl(
-                                "https://github.com/r0b0tt/covid19-app-flutter"),
-                            child: Icon(
-                              Ionicons.logo_github,
-                              size: 36,
-                            ),
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
+                        ),
+                      ],
+                    )
+                  ],
                 ),
               ),
-            )
-          ],
-        ),
+            ),
+          )
+        ],
       ),
     );
   }

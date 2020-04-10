@@ -10,9 +10,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart';
 
-class Countries extends StatelessWidget {
+class Countries extends StatefulWidget {
+  @override
+  _CountriesState createState() => _CountriesState();
+}
+
+class _CountriesState extends State<Countries> {
+  String countrySearchString = "";
+
   final CountriesRepository countriesRepository =
       CountriesRepository(dataApiClient: DataApiClient(httpClient: Client()));
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -65,50 +73,55 @@ class Countries extends StatelessWidget {
                   }
                   if (state is CountriesLoaded) {
                     List<Widget> countries = [];
+
                     for (var country in state.countriesModel.countries) {
                       String countryName = country["name"];
                       String countryIso2 = country["iso2"];
-                      countries.add(
-                        GestureDetector(
-                          onTap: () {
-                            final CountryRepository countryRepository =
-                                CountryRepository(
-                              countryName: countryName,
-                              dataApiClient: DataApiClient(
-                                httpClient: Client(),
-                              ),
-                            );
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => Country(
-                                  countryName: countryName,
-                                  countryRepository: countryRepository,
+                      if (countryName
+                          .toLowerCase()
+                          .contains(countrySearchString.toLowerCase())) {
+                        countries.add(
+                          GestureDetector(
+                            onTap: () {
+                              final CountryRepository countryRepository =
+                                  CountryRepository(
+                                countryName: countryName,
+                                dataApiClient: DataApiClient(
+                                  httpClient: Client(),
                                 ),
-                              ),
-                            );
-                          },
-                          child: Card(
-                            child: Container(
-                              padding: EdgeInsets.all(8),
-                              child: Column(
-                                children: <Widget>[
-                                  Expanded(
-                                    child: Image.network(
-                                      'https://www.countryflags.io/$countryIso2/shiny/64.png',
-                                      fit: BoxFit.fill,
+                              );
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => Country(
+                                    countryName: countryName,
+                                    countryRepository: countryRepository,
+                                  ),
+                                ),
+                              );
+                            },
+                            child: Card(
+                              child: Container(
+                                padding: EdgeInsets.all(8),
+                                child: Column(
+                                  children: <Widget>[
+                                    Expanded(
+                                      child: Image.network(
+                                        'https://www.countryflags.io/$countryIso2/shiny/64.png',
+                                        fit: BoxFit.fill,
+                                      ),
                                     ),
-                                  ),
-                                  Text(
-                                    countryName,
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ],
+                                    Text(
+                                      countryName,
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      );
+                        );
+                      }
                     }
 
                     return Column(
@@ -118,6 +131,11 @@ class Countries extends StatelessWidget {
                           child: Padding(
                             padding: EdgeInsets.all(12),
                             child: TextField(
+                              onChanged: (string) {
+                                setState(() {
+                                  countrySearchString = string;
+                                });
+                              },
                               maxLines: 1,
                               decoration: InputDecoration(
                                   hintText: "Search Country",
