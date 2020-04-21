@@ -2,8 +2,6 @@ import 'package:covid19/assets/app_colors.dart';
 import 'package:covid19/blocs/home_bloc.dart';
 import 'package:covid19/blocs/home_event.dart';
 import 'package:covid19/blocs/home_state.dart';
-import 'package:covid19/charts/cases_bar_chart.dart';
-import 'package:covid19/charts/cases_gauge_chart.dart';
 import 'package:covid19/components/loading_widget.dart';
 import 'package:covid19/repositories/data_api_client.dart';
 import 'package:covid19/repositories/repository.dart';
@@ -72,117 +70,276 @@ class HomePage extends StatelessWidget {
           child: ListView(
             padding: EdgeInsets.all(16),
             children: <Widget>[
+              // World Cases
               Card(
                 child: Padding(
-                    padding: EdgeInsets.all(8),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          "Cases (2020)",
-                          style: cardTitleStyles,
-                        ),
-                        SizedBox(height: 12),
-                        AspectRatio(
-                          aspectRatio: 1.75,
-                          child: CasesBarChart.withSampleData(),
-                        ),
-                      ],
-                    )),
+                  padding: EdgeInsets.all(12),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        "World Cases",
+                        style: cardTitleStyles,
+                      ),
+                      SizedBox(
+                        height: 12,
+                      ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text(
+                                  "Infected",
+                                  style: cardTitleStyles,
+                                ),
+                                SizedBox(height: 12),
+                                Text(
+                                  state.homeModel.confirmed.toString(),
+                                  style: patientsNumberStyle,
+                                ),
+                                SizedBox(height: 8),
+                                Text(""),
+                              ],
+                            ),
+                          ),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text(
+                                  "Recovered",
+                                  style: cardTitleStyles,
+                                ),
+                                SizedBox(height: 12),
+                                Text(
+                                  state.homeModel.recovered.toString(),
+                                  style: patientsNumberStyle,
+                                ),
+                                SizedBox(height: 8),
+                                Text(
+                                  state.homeModel.recoveredPercentage,
+                                  style: TextStyle(color: Colors.green),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text(
+                                  "Deaths",
+                                  style: cardTitleStyles,
+                                ),
+                                SizedBox(height: 12),
+                                Text(
+                                  state.homeModel.deaths.toString(),
+                                  style: patientsNumberStyle,
+                                ),
+                                SizedBox(height: 8),
+                                Text(
+                                  state.homeModel.deathPercentage,
+                                  style: TextStyle(color: Colors.red),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
               ),
               SizedBox(height: 12),
-              Row(
-                children: <Widget>[
-                  Expanded(
-                    child: Card(
-                      child: Padding(
-                        padding: EdgeInsets.all(12),
-                        child: Column(
-                          children: <Widget>[
-                            Text(
-                              "Infected",
-                              style: cardTitleStyles,
-                            ),
-                            SizedBox(height: 12),
-                            AspectRatio(
-                              aspectRatio: 1,
-                              child: GaugeChart.withSampleData("infected"),
-                            ),
-                            SizedBox(height: 12),
-                            Text(
-                              state.homeModel.confirmed.toString(),
-                              style: patientsNumberStyle,
-                            ),
-                            SizedBox(height: 8),
-                            Text(""),
-                          ],
-                        ),
+
+              // Prevention
+              Card(
+                child: Padding(
+                  padding: EdgeInsets.all(12),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        "Prevention",
+                        style: cardTitleStyles,
                       ),
-                    ),
+                      SizedBox(height: 24),
+                      GridView.count(
+                        crossAxisCount: 2,
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        childAspectRatio: 1.5,
+                        mainAxisSpacing: 24,
+                        crossAxisSpacing: 24,
+                        children: <Widget>[
+                          Column(
+                            children: <Widget>[
+                              Image(
+                                height: 72,
+                                image: AssetImage(
+                                  'assets/images/stay-home.png',
+                                ),
+                              ),
+                              SizedBox(
+                                height: 8,
+                              ),
+                              RichText(
+                                text: TextSpan(
+                                  text: "",
+                                  style: DefaultTextStyle.of(context).style,
+                                  children: <TextSpan>[
+                                    TextSpan(
+                                        text: 'STAY',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold)),
+                                    TextSpan(text: ' home'),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                          Column(
+                            children: <Widget>[
+                              Image(
+                                height: 72,
+                                image: AssetImage(
+                                  'assets/images/distance.png',
+                                ),
+                              ),
+                              SizedBox(
+                                height: 8,
+                              ),
+                              RichText(
+                                text: TextSpan(
+                                  text: "",
+                                  style: DefaultTextStyle.of(context).style,
+                                  children: <TextSpan>[
+                                    TextSpan(
+                                        text: 'KEEP',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold)),
+                                    TextSpan(text: ' a safe distance'),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                          Column(
+                            children: <Widget>[
+                              Image(
+                                height: 72,
+                                image: AssetImage(
+                                  'assets/images/hand-wash.png',
+                                ),
+                              ),
+                              SizedBox(
+                                height: 8,
+                              ),
+                              RichText(
+                                text: TextSpan(
+                                  text: "",
+                                  style: DefaultTextStyle.of(context).style,
+                                  children: <TextSpan>[
+                                    TextSpan(
+                                        text: 'WASH',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold)),
+                                    TextSpan(text: ' hands often'),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                          Column(
+                            children: <Widget>[
+                              Image(
+                                height: 72,
+                                image: AssetImage(
+                                  'assets/images/cough.png',
+                                ),
+                              ),
+                              SizedBox(
+                                height: 8,
+                              ),
+                              RichText(
+                                text: TextSpan(
+                                  text: "",
+                                  style: DefaultTextStyle.of(context).style,
+                                  children: <TextSpan>[
+                                    TextSpan(
+                                        text: 'COVER',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold)),
+                                    TextSpan(text: ' your cough'),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                          Column(
+                            children: <Widget>[
+                              Image(
+                                height: 72,
+                                image: AssetImage(
+                                  'assets/images/call-center.png',
+                                ),
+                              ),
+                              SizedBox(
+                                height: 8,
+                              ),
+                              RichText(
+                                text: TextSpan(
+                                  text: "",
+                                  style: DefaultTextStyle.of(context).style,
+                                  children: <TextSpan>[
+                                    TextSpan(
+                                        text: 'SICK?',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold)),
+                                    TextSpan(text: ' call ahead'),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                          Column(
+                            children: <Widget>[
+                              Image(
+                                height: 72,
+                                image: AssetImage(
+                                  'assets/images/government.png',
+                                ),
+                              ),
+                              SizedBox(
+                                height: 8,
+                              ),
+                              RichText(
+                                text: TextSpan(
+                                  text: "",
+                                  style: DefaultTextStyle.of(context).style,
+                                  children: <TextSpan>[
+                                    TextSpan(
+                                        text: 'FOLLOW',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold)),
+                                    TextSpan(text: ' instructions'),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      )
+                    ],
                   ),
-                  Expanded(
-                    child: Card(
-                      child: Padding(
-                        padding: EdgeInsets.all(12),
-                        child: Column(
-                          children: <Widget>[
-                            Text(
-                              "Recovered",
-                              style: cardTitleStyles,
-                            ),
-                            SizedBox(height: 12),
-                            AspectRatio(
-                              aspectRatio: 1,
-                              child: GaugeChart.withSampleData("recovered"),
-                            ),
-                            SizedBox(height: 12),
-                            Text(
-                              state.homeModel.recovered.toString(),
-                              style: patientsNumberStyle,
-                            ),
-                            SizedBox(height: 8),
-                            Text(
-                              state.homeModel.recoveredPercentage,
-                              style: TextStyle(color: Colors.green),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Card(
-                      child: Padding(
-                        padding: EdgeInsets.all(12),
-                        child: Column(
-                          children: <Widget>[
-                            Text(
-                              "Deaths",
-                              style: cardTitleStyles,
-                            ),
-                            SizedBox(height: 12),
-                            AspectRatio(
-                              aspectRatio: 1,
-                              child: GaugeChart.withSampleData("dead"),
-                            ),
-                            SizedBox(height: 12),
-                            Text(
-                              state.homeModel.deaths.toString(),
-                              style: patientsNumberStyle,
-                            ),
-                            SizedBox(height: 8),
-                            Text(
-                              state.homeModel.deathPercentage,
-                              style: TextStyle(color: Colors.red),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+                ),
               ),
-              SizedBox(height: 12),
+              SizedBox(
+                height: 12,
+              ),
               Card(
                 child: Padding(
                     padding: EdgeInsets.all(12),
