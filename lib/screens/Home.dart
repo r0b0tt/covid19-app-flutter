@@ -7,6 +7,7 @@ import 'package:covid19/repositories/data_api_client.dart';
 import 'package:covid19/repositories/repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:http/http.dart';
 
 class Home extends StatelessWidget {
@@ -70,6 +71,47 @@ class HomePage extends StatelessWidget {
           child: ListView(
             padding: EdgeInsets.all(16),
             children: <Widget>[
+              Card(
+                color: Colors.blue,
+                child: Padding(
+                    padding: EdgeInsets.all(12),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        SvgPicture.asset(
+                          "assets/images/relaxing.svg",
+                          height: 120,
+                          width: 120,
+                        ),
+                        RichText(
+                          text: TextSpan(
+                              style: DefaultTextStyle.of(context).style,
+                              children: <TextSpan>[
+                                TextSpan(
+                                  text: "STAY HOME!",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headline
+                                      .apply(
+                                        color: Colors.black,
+                                      ),
+                                ),
+                                TextSpan(
+                                  text: "\nStay Safe",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headline
+                                      .apply(
+                                        color: Colors.white,
+                                      ),
+                                )
+                              ]),
+                        ),
+                      ],
+                    )),
+              ),
+              SizedBox(height: 12),
               // World Cases
               Card(
                 child: Padding(
