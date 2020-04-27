@@ -29,7 +29,6 @@ class _AboutState extends State<About> {
 
   @override
   Widget build(BuildContext context) {
-    print(_packageInfo.version);
     return Container(
       color: AppColors.GREY,
       child: Column(

@@ -12,7 +12,6 @@ class CountriesBloc extends Bloc<DataEvent, DataState> {
       : assert(countriesRepository != null);
 
   @override
-  // TODO: implement initialState
   DataState get initialState => DataEmpty();
 
   @override
