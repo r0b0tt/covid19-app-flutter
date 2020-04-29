@@ -89,6 +89,14 @@ class _AboutState extends State<About> {
                           height: 4,
                         ),
                         _TextLink(
+                          text: "World Health Organization",
+                          url:
+                              "https://www.who.int/emergencies/diseases/novel-coronavirus-2019",
+                        ),
+                        SizedBox(
+                          height: 4,
+                        ),
+                        _TextLink(
                           text: "covid19.mathdro.id/api",
                           url: "https://covid19.mathdro.id/api",
                         ),

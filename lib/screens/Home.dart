@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:http/http.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Home extends StatelessWidget {
   final HomeRepository homeRepository =
@@ -72,41 +73,53 @@ class HomePage extends StatelessWidget {
             padding: EdgeInsets.all(16),
             children: <Widget>[
               Card(
-                color: Colors.blue,
+                color: Colors.lightBlueAccent,
                 child: Padding(
                     padding: EdgeInsets.all(12),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      crossAxisAlignment: CrossAxisAlignment.center,
+                    child: Column(
                       children: <Widget>[
-                        SvgPicture.asset(
-                          "assets/images/relaxing.svg",
-                          height: 120,
-                          width: 120,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            SvgPicture.asset(
+                              "assets/images/relaxing.svg",
+                              height: 120,
+                              width: 120,
+                            ),
+                            RichText(
+                              text: TextSpan(
+                                  style: DefaultTextStyle.of(context).style,
+                                  children: <TextSpan>[
+                                    TextSpan(
+                                      text: "STAY HOME!",
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headline
+                                          .apply(
+                                            color: Colors.black,
+                                          ),
+                                    ),
+                                    TextSpan(
+                                      text: "\nStay Safe",
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headline
+                                          .apply(
+                                            color: Colors.white,
+                                          ),
+                                    )
+                                  ]),
+                            ),
+                          ],
                         ),
-                        RichText(
-                          text: TextSpan(
-                              style: DefaultTextStyle.of(context).style,
-                              children: <TextSpan>[
-                                TextSpan(
-                                  text: "STAY HOME!",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headline
-                                      .apply(
-                                        color: Colors.black,
-                                      ),
-                                ),
-                                TextSpan(
-                                  text: "\nStay Safe",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headline
-                                      .apply(
-                                        color: Colors.white,
-                                      ),
-                                )
-                              ]),
+                        FlatButton(
+                          onPressed: () {
+                            _launchUrl(
+                                "https://www.who.int/emergencies/diseases/novel-coronavirus-2019");
+                          },
+                          color: Colors.white,
+                          child: Text("Learn More"),
                         ),
                       ],
                     )),
@@ -379,91 +392,21 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(
-                height: 12,
-              ),
-              Card(
-                child: Padding(
-                    padding: EdgeInsets.all(12),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: <Widget>[
-                        Text(
-                          "Most Affected Countries",
-                          style: TextStyle(
-                            color: AppColors.BLUE,
-                            fontSize: 14,
-                          ),
-                        ),
-                        SizedBox(height: 8),
-                        Container(
-                          child: DataTable(
-                            columnSpacing: 8,
-                            columns: [
-                              DataColumn(
-                                label: Text("Country"),
-                              ),
-                              DataColumn(label: Text("Infected")),
-                              DataColumn(label: Text("Recovered")),
-                              DataColumn(label: Text("Dead")),
-                            ],
-                            rows: [
-                              DataRow(cells: [
-                                DataCell(Text(
-                                  "China",
-                                  style: TextStyle(fontWeight: FontWeight.w500),
-                                )),
-                                DataCell(Text("123,000")),
-                                DataCell(Text("101,000")),
-                                DataCell(Text("11,000")),
-                              ]),
-                              DataRow(cells: [
-                                DataCell(Text(
-                                  "Italy",
-                                  style: TextStyle(fontWeight: FontWeight.w500),
-                                )),
-                                DataCell(Text("101,000")),
-                                DataCell(Text("56,000")),
-                                DataCell(Text("5,000")),
-                              ]),
-                              DataRow(cells: [
-                                DataCell(Text(
-                                  "USA",
-                                  style: TextStyle(fontWeight: FontWeight.w500),
-                                )),
-                                DataCell(Text("97,000")),
-                                DataCell(Text("48,000")),
-                                DataCell(Text("1,000")),
-                              ]),
-                              DataRow(cells: [
-                                DataCell(Text(
-                                  "South Korea",
-                                  style: TextStyle(fontWeight: FontWeight.w500),
-                                )),
-                                DataCell(Text("88,000")),
-                                DataCell(Text("20,000")),
-                                DataCell(Text("3,000")),
-                              ]),
-                              DataRow(cells: [
-                                DataCell(Text(
-                                  "Mexico",
-                                  style: TextStyle(fontWeight: FontWeight.w500),
-                                )),
-                                DataCell(Text("56,000")),
-                                DataCell(Text("36,000")),
-                                DataCell(Text("500")),
-                              ]),
-                            ],
-                          ),
-                        ),
-                      ],
-                    )),
-              ),
             ],
           ),
         );
       }
       return LoadingWidget();
     });
+  }
+}
+
+_launchUrl(String url) async {
+  if (await canLaunch(url)) {
+    await launch(
+      url,
+    );
+  } else {
+    throw 'Could not launch $url';
   }
 }
