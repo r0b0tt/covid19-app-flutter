@@ -31,4 +31,13 @@ class CountryLoaded extends DataState {
   List<Object> get props => [countryModel];
 }
 
+class FaqsLoaded extends DataState {
+  final FaqsModel faqsModel;
+
+  const FaqsLoaded({@required this.faqsModel});
+
+  @override
+  List<Object> get props => [faqsModel];
+}
+
 class DataError extends DataState {}

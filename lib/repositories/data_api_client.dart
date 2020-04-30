@@ -7,6 +7,8 @@ import 'package:http/http.dart';
 
 class DataApiClient {
   final _baseUrl = 'https://covid19.mathdro.id/api';
+  final _faqsUrl =
+      'https://us-central1-terra-simple-apps.cloudfunctions.net/covid19-faqs-scraper';
   final Client httpClient;
 
   DataApiClient({@required this.httpClient}) : assert(httpClient != null);
@@ -48,5 +50,18 @@ class DataApiClient {
     final json = jsonDecode(response.body);
 
     return CountryModel.fromJson(json);
+  }
+
+  Future<FaqsModel> fetchFaqs() async {
+    final url = _faqsUrl;
+    final response = await this.httpClient.get(url);
+
+    if (response.statusCode != 200) {
+      throw new Exception("An error occurred fetching countries");
+    }
+
+    final json = jsonDecode(response.body);
+
+    return FaqsModel.fromJson(json);
   }
 }
