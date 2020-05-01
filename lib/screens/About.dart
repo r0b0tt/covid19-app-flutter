@@ -62,7 +62,7 @@ class _AboutState extends State<About> {
                     ),
                     _Section(
                       title: "Contact",
-                      text: "antonio@terrainnovations.co",
+                      text: "antoniomainakn@gmail.com",
                     ),
                     SizedBox(
                       height: 24,
