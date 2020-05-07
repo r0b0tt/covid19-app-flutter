@@ -6,7 +6,9 @@ import 'package:covid19/repositories/data_api_client.dart';
 import 'package:covid19/repositories/faqs_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:http/http.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Faqs extends StatelessWidget {
   final FaqsRepository faqsRepository =
@@ -71,12 +73,18 @@ class Faqs extends StatelessWidget {
                         children: <Widget>[
                           Text(
                             question,
-                            style: Theme.of(context).textTheme.body2,
+                            style: Theme.of(context)
+                                .textTheme
+                                .body1
+                                .apply(fontWeightDelta: 2),
                           ),
                           SizedBox(
                             height: 8,
                           ),
-                          Text(answer)
+                          Linkify(
+                            onOpen: (link) => _launchUrl(link.url),
+                            text: answer,
+                          ),
                         ],
                       ),
                     ),
@@ -102,5 +110,15 @@ class Faqs extends StatelessWidget {
             );
           },
         ));
+  }
+}
+
+_launchUrl(String url) async {
+  if (await canLaunch(url)) {
+    await launch(
+      url,
+    );
+  } else {
+    throw 'Could not launch $url';
   }
 }
